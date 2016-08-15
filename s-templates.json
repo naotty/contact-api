@@ -1,0 +1,10 @@
+{
+  "contactApiRequestTemplate": {
+    "application/json": {
+      "recipient": "$util.escapeJavaScript($input.json('$.recipient'))",
+      "name": "$util.escapeJavaScript($input.json('$.name'))",
+      "email": "$util.escapeJavaScript($input.json('$.email'))",
+      "message": "$util.escapeJavaScript($input.json('$.message'))"
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "name": "v1-contacts",
+  "runtime": "nodejs4.3",
+  "description": "Serverless Lambda function for project: contact-api",
+  "customName": false,
+  "customRole": false,
+  "handler": "handler.handler",
+  "timeout": 3,
+  "memorySize": 128,
+  "authorizer": {},
+  "custom": {
+    "excludePatterns": []
+  },
+  "endpoints": [
+    {
+      "path": "v1/contacts",
+      "method": "POST",
+      "type": "AWS",
+      "authorizationType": "none",
+      "authorizerFunction": false,
+      "apiKeyRequired": false,
+      "requestParameters": {},
+      "requestTemplates": "$${contactApiRequestTemplate}",
+      "responses": {
+        "400": {
+          "selectionPattern": "^error\\.*",
+          "statusCode": "400"
+        },
+        "default": {
+          "statusCode": "200",
+          "responseParameters": {},
+          "responseModels": {
+            "application/json;charset=UTF-8": "Empty"
+          },
+          "responseTemplates": {
+            "application/json;charset=UTF-8": ""
+          }
+        }
+      }
+    }
+  ],
+  "events": [],
+  "environment": {
+    "SERVERLESS_PROJECT": "${project}",
+    "SERVERLESS_STAGE": "${stage}",
+    "SERVERLESS_REGION": "${region}",
+    "SNS_TOPIC_ARN": "${snsTopicArn}"
+  },
+  "vpc": {
+    "securityGroupIds": [],
+    "subnetIds": []
+  }
+}

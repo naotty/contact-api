@@ -1,0 +1,21 @@
+{
+  "name": "contact-api",
+  "custom": {
+    "cors": {
+      "allowOrigin": "http://${bucketNamePrefix}-${stage}.s3-website-${region}.amazonaws.com",
+      "allowHeaders": [
+        "Content-Type",
+        "X-Amz-Date",
+        "Authorization",
+        "X-Api-Key"
+      ]
+    },
+    "client": {
+      "bucketName": "${bucketNamePrefix}-${stage}"
+    }
+  },
+  "plugins": [
+    "serverless-cors-plugin",
+    "serverless-client-s3"
+  ]
+}
