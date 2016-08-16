@@ -4,26 +4,59 @@ Contact API by using [serverless/serverless: Serverless Framework – Build web,
 
 
 # Install
-Run at "dev" stage and "ap-northeast-1" region. 
-
-## 1. Install Serverless Framework.
+This manual is running at "dev" stage and "ap-northeast-1" region.   
+  
+requires Node v4.
 
 ```
-$ npm install serverless -g
+$ node -v
+v4.2.1
 ```
 
-**Notice** Run only Serverless Framework version 0.5.x.
+## 1. Create a default AWS profile, if you don't have one set locally
+see [serverless/provider\-account\-setup\.md at master · serverless/serverless](https://github.com/serverless/serverless/blob/master/docs/guide/provider-account-setup.md#amazon-web-services).
+
 
 ## 2. Create SNS topic and subscription(Protocol is email).
-## 3. Git clone this repo.
-## 4. Create CloudFormation resources.
+
+
+
+## 3. Install Serverless Framework.
 
 ```
-$ cd project-dir
-$ sls resources deploy -s dev
+$ npm install serverless@0.5.6 -g
+
+$ sls -v
+0.5.6
 ```
 
-## 5. Add variables.
+**[Notice]** Run only Serverless Framework version 0.5.x.
+
+
+## 4. Git clone this repo.
+
+```
+$ git clone https://github.com/naotty/contact-api.git
+```
+
+
+## 5. Install npm packages.
+
+```
+$ cd <project dir>
+$ npm install
+```
+
+
+## 6. Project Init.
+Create "dev" stage and select "ap-northeast-1" region.
+
+```
+$ sls project create -c true
+```
+
+
+## 7. Add variables.
 
 Add S3 bucket name prefix.
 
@@ -43,29 +76,42 @@ $ vi _meta/variables/s-variables-dev-apnortheast1.json
 
 {
   "region": "ap-northeast-1",
-  "resourcesStackName": "contact-api-dev-r",
-  "iamRoleArnLambda": "arn:aws:iam::00000:role/contact-api-dev-r-IamRoleLambda-xxxxx",
-  "apiGatewayApi": "contact-api",
 +  "snsTopicArn": "<your topic arn>"
 }
 ```
 
 
-## 6. Deploy Lambda Function.
+
+## 8. Create CloudFormation resources.
+
+```
+$ sls resources deploy -s dev
+```
+
+
+
+## 9. Deploy Lambda Function.
 
 ```
 $ sls function deploy -s dev
 ```
 
 
-## 7. Deploy Endpoint to AWS API Gateway.
+## 10. Deploy Endpoint to AWS API Gateway.
 
 ```
 $ sls endpoint deploy -s dev
 ```
 
 
-## 8. Access your contact form.
+## 11. Deploy contact form to S3 bucket.
+
+```
+$ sls client deploy -s dev
+```
+
+
+## 12. Access your contact form.
 
 
 Url is ``` http://<your bucket name prefix>-dev.s3-website-ap-northeast-1.amazonaws.com ```.
