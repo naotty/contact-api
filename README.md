@@ -20,7 +20,6 @@ see [serverless/provider\-account\-setup\.md at master · serverless/serverless]
 ## 2. Create SNS topic and subscription(Protocol is email).
 
 
-
 ## 3. Install Serverless Framework.
 
 ```
@@ -47,14 +46,12 @@ $ cd <project dir>
 $ npm install
 ```
 
-
 ## 6. Project Init.
 Create "dev" stage and select "ap-northeast-1" region.
 
 ```
 $ sls project create -c true
 ```
-
 
 ## 7. Add variables.
 
@@ -80,15 +77,11 @@ $ vi _meta/variables/s-variables-dev-apnortheast1.json
 }
 ```
 
-
-
 ## 8. Create CloudFormation resources.
 
 ```
 $ sls resources deploy -s dev
 ```
-
-
 
 ## 9. Deploy Lambda Function.
 
@@ -96,13 +89,11 @@ $ sls resources deploy -s dev
 $ sls function deploy -s dev
 ```
 
-
 ## 10. Deploy Endpoint to AWS API Gateway.
 
 ```
 $ sls endpoint deploy -s dev
 ```
-
 
 ## 11. Deploy contact form to S3 bucket.
 
@@ -110,9 +101,7 @@ $ sls endpoint deploy -s dev
 $ sls client deploy -s dev
 ```
 
-
 ## 12. Access your contact form.
-
 
 Url is ``` http://<your bucket name prefix>-dev.s3-website-ap-northeast-1.amazonaws.com ```.
 
