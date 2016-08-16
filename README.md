@@ -42,7 +42,7 @@ $ git clone https://github.com/naotty/contact-api.git
 ## 5. Install npm packages.
 
 ```
-$ cd <project dir>
+$ cd contact-api
 $ npm install
 ```
 
@@ -92,8 +92,24 @@ $ sls function deploy -s dev
 ## 10. Deploy Endpoint to AWS API Gateway.
 
 ```
-$ sls endpoint deploy -s dev
+$ sls endpoint deploy -a -s dev
+
+Serverless: Successfully deployed endpoints in "dev" to the following regions:
+Serverless: ap-northeast-1 ------------------------
+Serverless:   POST - v1/contacts - https://hogehoge.execute-api.ap-northeast-1.amazonaws.com/dev/v1/contacts
+Serverless:   OPTIONS - v1/contacts - https://hogehoge.execute-api.ap-northeast-1.amazonaws.com/dev/v1/contacts
 ```
+
+## 11. Set endpoint to js file.
+
+```
+$ vi client/dist/index.html
+
+$.ajax({
+-    url: "<your api gateway endpoint>",
++    url: "https://hogehoge.execute-api.ap-northeast-1.amazonaws.com/dev/v1/contacts",
+```
+
 
 ## 11. Deploy contact form to S3 bucket.
 
@@ -104,6 +120,15 @@ $ sls client deploy -s dev
 ## 12. Access your contact form.
 
 Url is ``` http://<your bucket name prefix>-dev.s3-website-ap-northeast-1.amazonaws.com ```.
+
+
+# Uninstall
+
+```
+$ sls projecct remove -s dev
+```
+
+**And remove API Gateway resources and Lambda functions manually...**
 
 
 # Licence
