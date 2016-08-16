@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+    <!-- Basic Page Needs
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>お問い合わせ</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/contact.css">
+
+    <!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+
+<!-- Primary Page Layout
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<div class="container">
+    <div class="row">
+        <div class="one-half column title">
+            <h4>お問い合わせフォーム</h4>
+            <p>下記フォームに必要事項を入力して送信してください。</p>
+        </div>
+    </div>
+
+    <form class="contact-form">
+        <div class="row">
+            <div class="six columns">
+                <label for="recipient">お問い合わせ項目</label>
+                <select class="u-full-width" id="recipient" name="recipient">
+                    <option value="1">当社の事業に関するお問い合わせ</option>
+                    <option value="2">当社の求人に関するお問い合わせ</option>
+                    <option value="3">その他のお問い合わせ</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="six columns">
+                <label for="name">お名前</label>
+                <input class="u-full-width" type="text" placeholder="例:田中 太郎" id="name" name="name">
+            </div>
+            <div class="six columns">
+                <label for="email">メールアドレス</label>
+                <input class="u-full-width" type="email" placeholder="例:test@mailbox.com" id="email" name="email">
+            </div>
+        </div>
+        <label for="message">お問い合わせ内容</label>
+        <textarea class="u-full-width" placeholder="例:会社説明会を行う予定はありますか？" id="message" name="message"></textarea>
+        <input class="button-primary" type="submit" value="送信">
+        <p class="result-message">
+            お問い合わせいただきありがとうございます。<br>
+            ご相談やご質問をいただいている場合は内容を確認次第、担当よりご連絡いたします。
+        </p>
+    </form>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $(".contact-form").on("submit", function(event) {
+            event.preventDefault();
+
+            $(".button-primary").hide();
+
+            var data = {
+                recipient: $("#recipient").val(),
+                name: $("#name").val(),
+                email: $("#email").val(),
+                message: $("#message").val()
+            };
+
+            $.ajax({
+                url: "https://inv1t2o2vb.execute-api.ap-northeast-1.amazonaws.com/dev/v1/contacts",
+                method: 'POST',
+                data: JSON.stringify(data),
+                contentType: 'application/json'
+            }).done(function(response) {
+                console.log(response);
+                $(".result-message").fadeIn();
+            }).fail(function() {
+                $(".result-message").text("送信できませんでした。しばらく時間をおいてから、再度お試しください。").fadeIn();
+            });
+        });
+    });
+</script>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
