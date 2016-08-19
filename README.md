@@ -123,12 +123,7 @@ Url is ``` http://<your bucket name prefix>-dev.s3-website-ap-northeast-1.amazon
 
 
 # Uninstall
-
-```
-$ sls projecct remove -s dev
-```
-
-**And remove API Gateway resources and Lambda functions manually...**
+Remove API Gateway resources and Lambda functions, delete stack on CloudFormation manually.
 
 
 # Licence
